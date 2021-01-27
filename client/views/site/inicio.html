@@ -1,0 +1,13 @@
+ <template name="inicio">
+   <div class="col-md-9">
+  <h1>APP <b>SECRETARIAS</b> <small> Perfil de <b>{{usuario.profile.rol}}</b>.</small></h1>
+<h3>NOMENCLADORES <small>últimos en excel</small></h3>
+{{> reactiveTable id="tabla" settings=settings}}
+</div>
+  
+  </template>
+  <template name="accionesExcel">
+
+   <button title="Descargar" type="button" class="descargar btn  btn-xs btn-warning" aria-label="Left Align"> <i class="fas fa-eye"></i></button>
+
+</template>

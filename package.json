@@ -1,0 +1,21 @@
+{
+  "name": "appAsociacion3",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.7.6",
+    "bcrypt": "^4.0.0",
+    "datatables.net-bs": "^1.10.20",
+    "find": "^0.3.0",
+    "meteor-node-stubs": "^1.0.0",
+    "meteor-random": "0.0.3",
+    "moment": "^2.24.0",
+    "print-js": "^1.0.63",
+    "puppeteer": "^2.1.1",
+    "random": "^2.1.1",
+    "simpl-schema": "^1.5.7",
+    "uuid": "^7.0.2"
+  }
+}

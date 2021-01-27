@@ -1,0 +1,138 @@
+<template name='imprimirReceta'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+                    <h4 class="modal-title"><button id="btnPrint" style="float:right" class="btn btn-success btn-sm"><span class="fas fa-print" aria-hidden="true"></span> Imprimir</button> </h4>
+                </div>
+                <div class="modal-body">
+                  <div  id='printable' class='printable'>
+
+                  <div style="padding-top: 40px;padding-bottom: 40px; padding-left: 60px;padding-right: 60px">
+                   <div ><img style="float:right;width: 90px" src="/images/logo2.bmp"/></div>
+                   <h4><b>{{profesional}}</b></h4>
+                   <b>Nro Matrícula:</b> {{nm}} <b>Matrícula Prov.:</b> {{mp}}<br>
+                   <i>Especialista en Oftalmología</i>
+                   <hr>
+                     <div class="col-md-13">
+                     <span><b>NOMBRE PACIENTE:</b>{{paciente_nombres}}</span><br>
+                     <span><b>OBRA SOCIAL:</b>{{paciente_obraSocial}}</span><br>
+                     <span><b>NRO AFILIADO:</b>{{paciente_nroAfiliado}}</span> <br> 
+                         <span><b>DNI:</b>{{paciente_dni}}</span> | 
+                         
+                         
+
+                   </div>
+                  <br>
+                  
+                  <h3>Rp/</h3>
+              {{#each medicamentos}}
+                {{> cadaMedicamento}}
+              {{/each}}
+            <img style="float:right;width: 190px"  src="{{imagenFirma}}"/>
+           <b>Fecha: </b>{{fecha}}
+            
+          
+
+             <br>
+              <br>
+              <br>
+              <br><br>
+              <br>
+
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <hr>
+              {{contactos}} <br><br>
+              <small> <small><i>Esto es una receta digital VALIDA DIGITAL generada por sistema de la ASOCIACION DE OFTALMOLOGOS de Comodoro Rivadavia</i></small></small>
+              </div>
+            </div>
+    
+  </div>
+
+</div>
+</div>
+  </div>
+</template>
+<template name="cadaMedicamento">
+
+<h4>- {{medicamento}}   |  <small>{{generico}} : {{presentacion}}</small></h4>
+
+<b>CANTIDAD: </b> {{cantidad}}
+<BR><BR>
+</template>
+<template name="recetas">
+   <h1><i class="fas fa-file-medical"></i> <b>RECETAS</b> </h1>
+
+{{> reactiveTable id="tabla" class="table-sm table" settings=settings}}
+ 
+</template>
+<template name="accionesRecetas">
+  <div class="acciones" style="display:none"> 
+ <button title="Imprimir" type="button" id="imprimir" class=" btn  btn-xs btn-success" aria-label="Left Align"> <i class="fas fa-print"></i></button>
+ <button title="Modificar" type="button" id="modificar" class="activar btn  btn-xs btn-primary" aria-label="Left Align"> <i class="fas fa-pencil-alt"></i></button>
+    <button title="Quitar" type="button" id="delete" class="delete btn  btn-xs btn-danger" aria-label="Left Align">  <i class="fas fa-trash-alt"></i> </button>
+</div>
+</template>
+<template name='nuevaReceta'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> NUEVA <small> RECETA</small></h1>
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm  collection="Recetas" id="nuevaReceta_" type="insert"}}
+  <fieldset>
+    <div class="row">
+      <div class="col-md-8">{{> afQuickField name='idPaciente'}} </div>
+      <div class="col-md-2">{{> afQuickField name='fecha'}} </div>
+    </div>
+  
+    {{> afQuickField name='medicamentos'}}
+  </fieldset>
+  <button type="submit"  style="width: 100%"  class="btn btn-primary">ACEPTAR</button>
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+<template name='modificarReceta'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> MODIFICAR <small> RECETA</small></h1>
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm  collection="Recetas" id="modificarReceta_" type="update" doc=this}}
+  <fieldset>
+ <div class="row">
+      <div class="col-md-8">{{> afQuickField id="idPaciente" name='idPaciente'}} </div>
+      <div class="col-md-2">{{> afQuickField name='fecha'}} </div>
+    </div>
+    {{> afQuickField name='medicamentos'}}
+  </fieldset>
+  <button type="submit"  style="width: 100%"  class="btn btn-primary">ACEPTAR</button>
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>

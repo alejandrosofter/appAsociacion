@@ -1,0 +1,77 @@
+<template name="subItemsGral">
+    <div class="modal fade bs-example-modal-lg" id="moduloSubItemsGral" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                 <h3><span class="glyphicon glyphicon-{{icono}}" aria-hidden="true"></span> <b>{{titulo}}</b> <small> {{subTitulo}} <b></b></small></h3>
+                </div>
+              <div class="modal-body">
+                   
+              <div id="formulario">{{> reactiveTable id=nombreTabla settings=settings}}</div>
+              <div id="items" style="display:none">
+<div style="float:right;"><button title="Volver" id="btnVolver" type="button" class="btn  btn-xs btn-primary" >  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</button> </div>
+              	{{> reactiveTable id="subItems_gral" settings=settingsItems}}
+
+              </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+<template name="accionesSubItemsGral"> 
+  <div class="acciones" style="display:none"> 
+     {{> Template.dynamic template=tmplAcciones data=this}}
+   {{#if tieneItems}}
+    <button title="Ver" type="button" class="ver btn  btn-xs btn-primary" aria-label="Left Align">  <span class="glyphicon glyphicon-search" aria-hidden="true"></span> </button>
+    {{/if}}
+    <button title="Quitar" type="button" class="delete btn  btn-xs btn-danger" aria-label="Left Align">  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>
+     
+  </div>
+</template>
+<template name="cadaCampoSubItem">
+
+</template>
+<template name='nuevoSubItemsGral'>
+<div id="nuevoSubItemsGralModal" class="modal fade"> 
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                	
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><b> NUEVO </b> <span style="text-transform: capitalize">{{titulo}}</span></h4>
+                </div>
+                <div class="modal-body">
+                     {{#autoForm  collection=Coleccion id="nuevoSubItemsGral_" doc=documento scope=scope type="update-pushArray"}}
+                          
+                    <div id="formulario"> 
+                     {{#if tieneItems}}<div style="float:right;"><button title="Items" id="btnItems" type="button" class="btn  btn-xs btn-primary" >  <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Items</button> </div>{{/if}}
+                      {{> Template.dynamic template=tmpl data=this}} 
+                  </div>
+                     {{#if tieneItems}} 
+                     <div style="display:none" id="items"> 
+                     	<div style="float:right;"><button title="Items" id="btnVolver" type="button" class="btn  btn-xs btn-primary" >  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</button> </div>
+                     	  {{> reactiveTable id="tablaItemsGral" settings=settingsItems}}
+                        <div id="itemsForm">
+                          {{#each item in items}}
+                            {{#each campo in item.campos}}
+                            <input type="hidden"  name="{{nombreCampoItems}}.{{item.cont}}.{{campo}}" value="{{getValorCampo item campo}}" data-schema-key="{{nombreCampoItems}}.{{item.cont}}.{{campo}}" class="form-control">
+{{/each}}
+                          {{/each}}
+                        </div>
+                      </div> 
+
+                     {{/if}} 
+                  <button type="submit" disabled="{{disableButtons}}" id="btnAceptar" style="width:100%" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ACEPTAR</button>
+
+                     
+                     {{/autoForm}}
+                  
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</template>

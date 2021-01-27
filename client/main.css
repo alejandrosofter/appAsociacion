@@ -1,0 +1,286 @@
+@media print {
+     /* on modal open bootstrap adds class "modal-open" to body, so you can handle that case and hide body */
+    body.modal-open * {
+        visibility: hidden;
+       
+    }
+
+   
+    body.modal-open .modal .modal-body *{
+        visibility: visible; 
+    }
+  body.modal-open .modal .modal-body {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}
+hr {
+	border-top: 1px solid #8c8b8b;
+	border-bottom: 1px solid #fff; 
+}
+.os{
+  font-size: 10px;
+}
+.modal {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow-y:scroll 
+}
+.modal.open {
+   display: block;
+}
+.importeOs{
+  font-size: 10px;
+  color: blue
+}
+.select2-container.form-control {
+width: 50%;
+height:50px;
+}
+.fechaConsulta{
+  width: 150px
+}
+.coeficiente{
+  width: 90px
+}
+.imagenGris {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+.dataTables_processing {
+left: 50%;
+position: absolute;
+top: 50%;
+  width:0px;
+  height:0px;
+  
+z-index: 100;
+}
+.loader2{
+  height: 100%;
+    width:100%;
+    margin:0;
+    padding:0;
+    background:url(/images/loading.gif);
+    background-position:50% 50%;
+    background-repeat:no-repeat;
+}
+hr.style18 { 
+  border: 0; 
+  height: 1px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+}
+hr.style18:before { 
+
+}
+.filaSeleccionCategorias{
+  background-color:#71d46f;
+  color: #2b8fca;
+  font-weight: bolder;
+  
+}
+[data-required] label:after {
+  content:" *";
+   color:red;
+}
+
+.mes{
+  cursor:pointer;
+}
+.claseBaja{
+  color:red;
+  font-weight: bolder;
+}
+.calseSuspendido{
+  color:orange;
+  font-weight: bolder;
+}
+.claseAlta{
+  color:green;
+  font-weight: bolder;
+}
+tbody > tr.inactivo > td{
+  color:red;
+}
+tbody > tr.inactivo:hover > td{
+  color:white;
+  background-color:red;
+}
+tbody > tr.deshabilitado > td{
+  color:#ccc;
+}
+tbody > tr.deshabilitado:hover > td{
+  color:white;
+  background-color:red;
+}
+
+tbody > tr.suspendido > td{
+  color:orange;
+}
+tbody > tr.suspendido:hover > td{
+  color:white;
+  background-color:orange;
+}
+
+tbody > tr.pagado > td{
+  color:green;
+}
+tbody > tr.pagado:hover > td{
+  color:white;
+  background-color:green;
+}
+.hijo_1{
+  font-size:10px;
+  text-indent: 10px; 
+   color:#616363;
+}
+.hijo_2{
+  font-size:9px;
+  text-indent: 20px;
+   color:#7d7d7d;
+}
+.hijo_3{
+  font-size:8px;
+  text-indent: 30px;
+   color:#9a9a9a;
+}
+.hijo_4{
+  font-size:7px;
+  text-indent: 40px;
+   color:#b5b5b5;
+}
+.hijo_5{
+  font-size:6px;
+  text-indent: 50px;
+   color:#b9b9b9;
+}
+.razonSocial{
+  color:#669999;
+    font-weight: bolder;
+    font-size:14px;
+  
+}
+.codigoInterno {
+   color: #337ab7;
+  font-weight: bolder;
+}
+.subTitulo{
+color: rgba(51, 122, 183, 0.57);
+}
+.titulo{
+  color:#337ab7;
+}
+.bajaSocio{
+  color:#ccc;
+}
+body{
+  font-size:13px;
+}
+tbody > tr:hover {
+  background-color: #71d46f;
+  color: #2b8fca;
+  font-weight: bolder;
+        }
+.filaSeleccionCategorias:hover{
+  background-color: #71d46f;
+  
+}
+.filaDetalleEstadistica{
+  font-color:#849be2;
+  font-size:10px;
+   background-color: #ccc;
+}
+.seleccionFilaDetalle{
+  font-color:blue;
+   background-color: #ccc;
+  font-weight: bolder;
+}
+.seleccionFila{
+  color:black;
+   background-color: yellow;
+   font-weight: bolder;
+}
+
+.nombreProducto{
+  color: #ad2bca;
+  font-size:14px;
+  font-weight: bold;
+}
+
+/* basic typeahead styles */
+
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 396px;
+  padding: 8px 12px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+}
+
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {
+  width: 422px;
+  margin: 4px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}

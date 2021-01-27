@@ -1,0 +1,246 @@
+<template name="buscadorSocios">
+  <span ><span style="width:200px;text-transform: uppercase">{{apellido}}</span> <small>{{nombre}}</small> <small style="color:green">({{dni}})</small><small style="color:blue">-{{nroSocio}}</small> </span>
+</template>
+<template name="layoutVacio">
+
+  <div class="container-fluid">
+    {{> yield}}
+  </div>
+
+</template>
+
+<template name='facturarMasivoOs'>
+<div class="modal fade bs-example-modal-lg" tabindex="" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+                  <h2><b>LIQUIDAR MASIVO</b> para Obras Sociales</h2>
+                </div>
+
+              <div class="modal-body">
+                <div class="form-inline">
+                  <input class="form-control" style="width: 80px" id="mes" placeholder="MES">
+                  <input class="form-control" style="width: 120px" id="ano" placeholder="ANO">
+                  <select class="js-example-basic-single" style="width: 350px" id="idObraSocial">
+                  </select>
+                  <a class="btn btn-success btn-sm" id="btnBuscar"><b>BUSCAR</b> Facturacion</a>
+                </div>
+                <table class="table table-condensed">
+               <thead> <tr><th>PROFESIONAL</th><th>CANTIDAD</th><th>IMPORTE</th><th>ESTADO LIQUIDACION</th></tr></thead>
+               <tbody>
+               {{#each os}}
+                <tr><td>{{profesional}}</td><td>{{cantidad}}</td><td>{{importe}}</td><td>{{estado}}</td><td><button title="Inyectar en SISTEMA ASOCIACION" type="button" id="syncServidor" class="activar btn  btn-xs btn-info" aria-label="Left Align">  <i class="fas fa-file-import"></i></button></td></tr>
+               {{/each}}
+             </tbody>
+           </table>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</template>
+<template name="usuarioChat">
+<li class="dropdown">
+          <a class="dropdown-toggle" id="abrirChat" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="usuariosChat" id="usuario_{{id}}">
+	           
+	            {{nombreUsuario}}
+	<span id="cantidadMensajes_{{id}}" style="display:none" class="label label-danger"></span> 
+			</span>      
+            </a>
+        </li>
+
+</template>
+<template name="layoutApp">
+
+{{#if estaLogueado}}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<nav class="navbar navbar-inverse navbar-static-top">
+
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"> <i class="fas fa-home"></i> Inicio</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+         <li class="dropdown">
+          <a href="/Liquidaciones" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           <i style="color:#bb359e" class="fas fa-box"></i>
+            Liquidaciones
+            </a>
+        </li>
+        <li class="dropdown">
+          <a href="/obrasSociales" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           <i style="color:#bb359e" class="fas fa-user-tie"></i> 
+            Obras Sociales
+            </a>
+        </li>
+         
+        {{#if puedeVerAux}}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i style="color:#bb359e"  class="fas fa-plug"></i>
+          Conexión O.S
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+             <li><a href="/loginObrasSociales" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Ver Conexiónes
+            </a></li>
+             <li><a href="#" id="nuevoLoginObraSocial" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Nueva Conexión
+            </a></li>
+
+           
+             
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i style="color:#bb359e"  class="fas fa-user-injured"></i>
+          Pacientes
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+             <li><a href="/pacientes" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Ver Pacientes
+            </a></li>
+             <li><a href="#" id="nuevoPaciente" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Nuevo Pacientes
+            </a></li>
+
+           
+             
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i style="color:#bb359e"  class="fas fa-file-medical"></i>
+          Recetas
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+             <li><a href="/recetas" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Ver Recetas
+            </a></li>
+             <li><a href="#" id="nuevaReceta" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Nueva Receta
+            </a></li>
+
+ <li role="presentation" class="divider"></li>
+            <li><a href="/medicamentos" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Ver Medicamentos
+            </a></li>
+             <li><a href="#" id="nuevoMedicamento" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Nuevo Medicamento
+            </a></li>
+
+           
+             
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+           
+           <i style="color:#bb359e" class="fas fa-file-alt"></i>
+            Estudios
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+             <li><a href="/estudios" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Ver Estudios
+            </a></li>
+             <li><a href="#" id="nuevoEstudio" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           Nuevo Estudio
+            </a></li>
+
+           
+             
+          </ul>
+        </li>
+        {{/if}}
+         
+         {{#if esAdmin}}
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" id="btnLiquidarMasivo" role="button" aria-haspopup="true" aria-expanded="false">
+           <i style="color:#bb359e" class="fas fa-reply-all"></i>
+            Hacer liquidacion POR OS
+            </a>
+        </li>
+        
+         {{/if}}
+          {{#if puedeSync}}
+    
+      <li class="dropdown">
+          <a  class="dropdown-toggle"  role="button" style="cursor: pointer;color:yellow" id="btnSync" aria-haspopup="true" aria-expanded="false">
+           <i class="fas fa-sync"></i> 
+            SYNC OS
+            </a>
+        </li>
+      {{/if}}
+       
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <div style="float:right;color:red;display:none" id='offline'><small style="padding:5px">offline</small> </div>
+         <div style="float:right;color:green;display:none" id='online'><small style="padding:5px">online</small> </div>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{nombreUsuario}} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+
+            <li><a href="#" class="salirSistema">Salir</a></li>
+            {{#if esAdmin}}
+          <li class="dropdown">
+          <a href="/settings" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           <i style="color:#bb359e" class="fas fa-cog"></i>
+            Configuraciones
+            </a>
+        </li>
+        
+         {{/if}}
+         {{#if esAdmin}}
+          <li class="dropdown">
+          <a href="/usuarios" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           <i style="color:#bb359e" class="fas fa-user"></i>
+            Usuarios
+            </a>
+        </li>
+        <li class="dropdown">
+          <a href="/ConexionObraSocial" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false">
+           <i style="color:#bb359e" class="fab fa-connectdevelop"></i>
+            Conexiones O.S
+            </a>
+        </li>
+        
+         {{/if}}
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+ {{/if}}
+  <aside>
+    {{> yield "aside"}}
+  </aside>
+
+  <div style="padding-left: 80px;padding-right: 80px;" class="container-fluid">
+    {{> yield}}
+  </div>
+
+  <footer>
+    {{> footer}}
+  </footer>
+ 
+</template>
+<template name='footer'>
+<div class="bs-docs-footer">
+  <br><br>
+  <p align="center"><small>Sistema desarrolado por <b>SOFTER</b> softer.com.ar <br><small>Cualquier inconveniente comunicarse al <b>2975447771</b> o enviar correo a <b>alejandro@softer.com.ar</b></small> </small></p>
+ </div>
+</template>

@@ -1,0 +1,213 @@
+<template name="usuarios">
+
+   <h1><i class="fas fa-user"></i> <b>USUARIOS</b> generales del sistema </h1>
+ 
+{{> reactiveTable id="tabla" class="table table-sm" settings=settings}}
+<button style="width: 100%" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Agrega una <b>NUEVO</b> usuario del sistema" id="btnAgregar" class="btn btn-success btn"><i class="fas fa-plus"></i> <b>NUEVO</b> Usuario </button>
+</template>
+<template name="accionesUsuarios">
+  <div class="acciones" style="display:none">
+      
+      
+    <button title="Modificar" type="button" id="modificar" class="activar btn  btn-xs btn-success" aria-label="Left Align">  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </button>
+    <button title="Quitar" type="button" id="delete" class="delete btn  btn-xs btn-danger" aria-label="Left Align">  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>
+  </div>
+</template>
+<template name="nuevoUsuario">
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                 <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <b>NUEVO</b> Usuario </h3>
+                </div>
+              <div class="modal-body">
+                  <form class="form-horizontal">
+				  <div class="form-group row">
+				    <label for="usuario" class="col-sm-2 control-label">Usuario</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="usuario" placeholder="Nombre de Usuario">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="password" class="col-sm-2 control-label">Password</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="password" placeholder="Password">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="idProfesional" class="col-sm-2 control-label">ID Profesional</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="idProfesional" placeholder="ID  en sistema asociacion">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="profesional" class="col-sm-2 control-label">Profesional a cargo</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="profesional" placeholder="Nombre Profesional">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="nm" class="col-sm-2 control-label">Nro Matricula</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="nm" placeholder="Nro">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="mp" class="col-sm-2 control-label">Nro Matricula Prov.</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="mp" placeholder="Nro">
+				    </div>
+				  </div>
+				   
+				   <div class="form-group row">
+				    <label for="nombres" class="col-sm-2 control-label">Nombres</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="nombres" placeholder="Nombres Completos">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="email" class="col-sm-2 control-label">Email</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control" id="email" placeholder="@">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="telefono" class="col-sm-2 control-label">Telefono</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="telefono" placeholder="297.......">
+				    </div>
+				  </div>
+				   <div class="form-group row">
+				    <label for="tipoUsuario" class="col-sm-2 control-label">Tipo Usuario</label>
+				    <div class="col-sm-10">
+				      <select id="tipoUsuario" class="form-control">
+					  <option value="administrador">Administrador</option>
+					  <option value="secretaria">Secretaria/o Profesional</option>
+					   <option value="secretariaGral">Secretaria/o Gral</option>
+					</select>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="nm" class="col-sm-2 control-label">Contactos</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" value="{{data.profile.contactos}}"  id="contactos" placeholder="Contactos">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="imagenFirma" class="col-sm-2 control-label">Imagen Firma</label>
+				    <div class="col-sm-10">
+				      <input name="imagenFirma" type="file" class="imagenFirma">
+				      <input name="idImagenFirma" id="idImagenFirma" type="hidden">
+				    </div>
+				  </div>
+				  
+				  <span  role="button" style="width: 100%" data-toggle="tooltip" data-placement="bottom" data-html="true" title="" id="btnAgregarUsuario" class="btn btn-success"><i class="fas fa-check"></i> ACEPTAR </span>
+				 
+
+				</form>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+<template name="modificarUsuario">
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                 <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <b>MODIFICAR</b> Usuario </h3>
+                </div>
+              <div class="modal-body">
+                  <form>
+				  <div class="form-group row">
+				    <label for="usuario" class="col-sm-2 col-form-label">Usuario</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="usuario" value="{{data.username}}" placeholder="Nombre de Usuario">
+				    </div>
+				  </div>
+				   <div class="form-group row">
+				    <label for="password" class="col-sm-2 control-label">Password</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="password" placeholder="Password">
+				    <small id="emailHelp" class="form-text text-muted">Si escribe una clave.. se cambiara reseteara la clave actual</small>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="idProfesional" class="col-sm-2 control-label">ID Profesional</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="idProfesional"  value="{{data.profile.idProfesional}}" placeholder="ID  en sistema asociacion">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="profesional" class="col-sm-2 control-label">Profesional a cargo</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="profesional"  value="{{data.profile.profesional}}" placeholder="Nombre Profesional">
+				    </div>
+				  </div>
+				    <div class="form-group row">
+				    <label for="nm" class="col-sm-2 control-label">Nro Matricula</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" value="{{data.profile.nm}}"  id="nm" placeholder="Nro">
+				    </div>
+				  </div>
+				   <div class="form-group row">
+				    <label for="nm" class="col-sm-2 control-label">Contactos</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" value="{{data.profile.contactos}}"  id="contactos" placeholder="Contactos">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="mp" class="col-sm-2 control-label">Nro Matricula Prov.</label>
+				    <div class="col-sm-10">
+				      <input type="text" value="{{data.profile.mp}}"  class="form-control" id="mp" placeholder="Nro">
+				    </div>
+				  </div>
+				   <div class="form-group row">
+				    <label for="nombres" class="col-sm-2 control-label">Nombres</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="nombres"  value="{{data.profile.nombres}}" placeholder="Nombres Completos">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="email" class="col-sm-2 control-label">Email</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control"  value="{{data.profile.email}}" id="email" placeholder="@">
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="telefono" class="col-sm-2 control-label">Telefono</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control"  value="{{data.profile.telefono}}" id="telefono" placeholder="297.......">
+				    </div>
+				  </div>
+				   <div class="form-group row">
+				    <label for="tipoUsuario" class="col-sm-2 control-label">Tipo Usuario</label>
+				    <div class="col-sm-10">
+				      <select id="tipoUsuario" value="{{data.profile.rol}}" class="form-control">
+					  <option value="administrador">Administrador</option>
+					  <option value="secretaria">Secretaria/o Profesional</option>
+					   <option value="secretariaGral">Secretaria/o Gral</option>
+					</select>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="imagenFirma" class="col-sm-2 control-label">Imagen Firma</label>
+				    <div class="col-sm-10">
+				      <input name="imagenFirma" type="file" class="imagenFirma">
+				      <input name="idImagenFirma" value="{{data.profile.idImagenFirma}}" id="idImagenFirma" type="hidden">
+				      <img src="{{imagenFirma.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" />
+				       <img src="{{imagenFirma}}">
+				    </div>
+				  </div>
+
+				</form>
+				<span  role="button" style="width: 100%" data-toggle="tooltip" data-placement="bottom" data-html="true" title="" id="btnAgregar" class="btn btn-success"><i class="fas fa-check"></i> MODIFICAR </span>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>

@@ -1,0 +1,427 @@
+<template name="nomencladoresModificados">
+<div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                  <div style="float:right">  <button id="btnGuardar"  class="btn btn-primary btn-sm"><i class="fas fa-save"></i> ACEPTAR y <b>GUARDAR</b></button> </div>
+                </div>
+
+              <div class="modal-body">
+                 {{> reactiveTable id="tabla" class="table table-condensed table-striped" settings=settings}}
+            </div>
+          </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
+</template>
+<template name="liquidaciones_facturas">
+    {{#if puedeCargar}}
+    <button style="float:right;" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Buscar y cambia valores de nuevos nomencladores" id="btnCheck" class="btn  btn-sm btn-primary  btn"><i class="fas fa-check-double"></i> <b>Check</b> IMPORTES </button>
+    {{/if}}
+    <h1><b>PRACTICAS </b>{{detalleLiquidacion}}</h1>
+<div class="row">
+
+  <div class="col-md-3">
+   {{> filtroOs}}
+  </div>
+   <div class="col-md-8">
+    {{> reactiveTable id="tabla" class="table table-condensed table-striped" settings=settings}}
+     {{#if puedeFacturar}}
+    <button style="width: 100%" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Agrega una <b>NUEVA</b> liquidacion para luego cargar la facturacion " id="btnAgregar" class="btn btn-success btn"><i class="fas fa-plus"></i> <b>NUEVA</b> FACTURA </button>
+    {{/if}}
+  </div>
+  </div>
+</template>
+<template name="accionesFiltroOs">
+ {{#if puedeInyectar}}
+<button title="Inyectar en SISTEMA ASOCIACION" type="button" id="syncServidor" class="activar btn  btn-xs btn-info" aria-label="Left Align">  <i class="fas fa-file-import"></i></button>
+
+  {{/if}}
+  <button title="Imprimir" id="btnImprimir" type="button" class="activar btn  btn-xs btn-success" aria-label="Left Align">  <i class="fas fa-print"></i></button>
+   <button title="Ver Practicas" type="button" class="btnObraSocial btn  btn-xs btn-warning" aria-label="Left Align">  <i class="far fa-eye"></i></button>
+
+</template>
+<template name="filtroOs">
+  <h4><b>O.S</b> Carga</h4>
+<div class="list-group">
+  {{> reactiveTable id="tablaOs" class="table table-condensed table-striped" settings=settingsOs}}
+     
+<!-- {{#each obrasSociales}}
+  <button id="seleccion_{{idObraSocial}}" style="background-color:{{color}}" type="button" class="list-group-item list-group-item-action btnObraSocial">{{nombreOs}}<b> ({{cantidad}})</b> <br><b style="color:#a2b7a2">$ {{importe}}</b>
+ 
+ <span class="botonAccion" style="float:right;" data-toggle="tooltip"  data-html="true">
+
+  {{#if puedeInyectar}}
+<button title="Inyectar en SISTEMA ASOCIACION" type="button" id="syncServidor" class="activar btn  btn-xs btn-info" aria-label="Left Align">  <i class="fas fa-file-import"></i></button>
+
+  {{/if}}
+  <button title="Imprimir" id="btnImprimir" type="button" class="activar btn  btn-xs btn-success" aria-label="Left Align">  <i class="fas fa-print"></i></button>
+
+</span>
+  </button>
+{{/each}} -->
+ <button  type="button" class="list-group-item"><span style="float:right;">TOTAL $ <b>{{total}}</b></span></button>
+</div>
+ 
+</template>
+<template name="osAuto">
+ {{nombreOs}}
+
+</template>
+<template name="filtroOtros">
+
+ {{> inputAutocomplete class="form-control" settings=settings id="entidadFiltro"  placeholder="Entidad..."}}
+     
+     
+</template>
+
+<template name="liquidaciones">
+  
+   <div style="float:right;">
+     <button  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Agrega una nueva liquidacion para luego cargar la facturacion " id="btnAgregar" class="btn btn-success btn"><i class="fas fa-plus"></i> <b>NUEVA</b> Liquidacion </button>
+    <button id="btnAyuda"  class="btn btn-warning btn-sm"><i class="fas fa-life-ring"></i> AYUDA</button>
+
+  </div>
+    <h1><i style="color:#bb359e"   class="fas fa-box"></i> LIQUIDACIONES<small> </small></h1>
+<div class="form-inline">
+<input id="fechaDesde" placeholder="Hasta"  class="form-control" style="width: 100px">
+<input id="fechaHasta" placeholder="Hasta" class="form-control" style="width: 100px">
+<div class="form-group" id="conteUsuario"><select style="width: 350px" id="usuario"></select></div>
+<button id="btnBuscar" class="btn btn-sm btn-success"><b>BUSCAR</b></button>
+</div>
+{{> reactiveTable id="tabla" class="table table-condensed table-striped" settings=settings}}
+
+</template>
+<template name="accionesLiquidaciones">
+  <script>
+$(function () {
+  
+})
+  </script>
+  <div class="acciones" style="display:none"> 
+    
+    {{#if puedeInyectar}}
+
+
+<button title="Inyectar en SISTEMA ASOCIACION" type="button" id="syncServidor" class="activar btn  btn-xs btn-info" aria-label="Left Align">  <i class="fas fa-file-import"></i></button>
+
+    {{/if}}
+    <button title="Imprimir" type="button" id="btnImprimir" class="activar btn  btn-xs btn-success" aria-label="Left Align">  <i class="fas fa-print"></i></button>
+    
+    {{#if puedeEnviar}}
+    <button title="Enviar" type="button" id="enviar" class="activar btn  btn-xs btn-warning" aria-label="Left Align">  <i title="Enviar" class="fas fa-satellite-dish"></i></button>
+    {{/if}}
+    {{#if puedeCambiarEstado}}
+   
+    
+    <button title="Modificar" type="button" id="modificar" class="activar btn  btn-xs btn-primary" aria-label="Left Align"> <i class="fas fa-pencil-alt"></i></button>
+    <button title="Quitar" type="button" id="delete" class="delete btn  btn-xs btn-danger" aria-label="Left Align">  <i class="fas fa-trash-alt"></i> </button>
+   {{/if}}
+  </div>
+</template>
+<template name="accionesLiquidaciones_facturas">
+  
+  <div class="acciones" style="display:none">
+   {{#if puedeCargar}}
+      <button title="Modificar" type="button" id="modificar" class="activar btn  btn-xs btn-primary" aria-label="Left Align">  <i class="fas fa-pencil-alt"></i>  </button>
+    <button title="Quitar" type="button" id="delete" class="delete btn  btn-xs btn-danger" aria-label="Left Align"> <i class="fas fa-trash-alt"></i>  </button>
+      {{/if}}
+  </div>
+</template>
+<template name="resumenOs">
+
+  <h3><b>{{nombreOs}}</b> <small>{{detalle}}</small></h3>
+
+  <h3 style=""></h3>
+  <small>
+   <table class="table table-condensed">
+    <thead>
+ <tr><th>NRO ORDEN</th><th>FECHA.C</th><th>PACIENTE</th><th>NOMENCLADOR</th><th>COEFICIENTE</th><th>IMPORTE</th></tr>
+</thead>
+<tbody>
+  
+{{#each facturas}}
+  <tr><td>{{nroOrden}}</td><td>{{fechaConsulta}}</td><td>{{paciente}}</td><td>{{nomenclador}}</td><td>{{coef}}</td><td>{{importe}}</td></tr>
+{{/each}}
+<tr><th></th><th></th><th></th><th></th><th>TOTAL</th><th>{{importeTotal}}</th></tr>
+
+</tbody>
+</table>
+</small>
+</template>
+<template name='imprimirLiquidacion'>
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                  <div style="float:right">  <button id="btnImprimirLiq"  class="btn btn-success btn-sm"><i class="fas fa-print"></i> Imprimir</button> </div>
+                </div>
+
+              <div class="modal-body">
+                <div  id='printable' class='printable'>
+                  <div style="padding-top: 40px;padding-bottom: 40px; padding-left: 60px;padding-right: 60px">
+                   <div style="float:right;padding: 30px;" ><img src="/images/logo2.bmp"/></div>
+                  <span><b>PROFESIONAL: </b>{{profesional}}</span> <br>
+                 <span><b>FECHA DE LIQUIDACION:</b>{{fecha}}</span><br>
+                 <span><b>NRO DE LIQUIDACION:</b>{{nroLiquidacion}}</span>
+      
+              {{#each obrasSociales}}
+                {{>resumenOs}}
+              {{/each}}
+              
+            
+              <small><i>Esta liquidación debe ser impresa en papel y adjuntada con la documentación en papel que respalda dicha carga. Toda documentación debe ser entregada en las oficinas de la asociación ( <b>Colonos Galeses 2505 - Comodoro Rivadavia CP 9000</b> )  a fin de realizar el chequeo correspondiente para finalizar el proceso de facturación.</i></small>
+              </div>
+            </div>
+          </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</template>
+<template name='imprimirGral'>
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                  <div style="float:right">  <button id="btnImprimirLiq"  class="btn btn-success btn-sm"><i class="fas fa-print"></i> Imprimir</button> </div>
+                </div>
+
+              <div class="modal-body">
+                <div id='printable' class='printable'>
+                   <div style="float:right;padding: 30px;" ><img src="/images/logo2.bmp"/></div>
+                  <span><b>PROFESIONAL: </b>{{profesional}}</span> <br>
+                 <span><b>FECHA DE LIQUIDACION:</b>{{fecha}}</span><br>
+                 <span><b>NRO DE LIQUIDACION:</b>{{nroLiquidacion}}</span>
+            <h1>INFORME <b>GRAL</b></h1>
+              <table class="table table-condensed">
+                <thead><tr><th>OBRA SOCIAL</th><th>CANTIDAD</th><th style="text-align: right;">IMPORTE</th></tr></thead>
+                <tbody>
+              {{#each obrasSociales}}
+                <tr><td>{{nombreOs}}</td><td>{{cantidad}}</td><td style="text-align: right;">{{importe}}</td></tr>
+              {{/each}}
+              <tr><td></td><th>TOTAL </th><th style="text-align: right;">{{importeTotal}}</th></tr>
+            </tbody>
+          </table>
+              
+            <BR><BR><BR><BR><BR><BR><BR><BR><BR>
+              <small><i style="float:left">
+                __________________________________
+                <br>Secretaria <b>{{profesional}}</b>
+              </i></small>
+
+              <small><i style="float:right;">
+                __________________________________
+                <br>Administracion
+              </i></small>
+              <BR><BR><BR><BR>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</template>
+<template name='ayudaLiquidacion'>
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                  <div style="float:right">  <h4><b>AYUDA </b>Liquidaciones</h4> </div>
+                </div>
+
+              <div class="modal-body">
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/EZG-RgW_Vi4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+</template>
+
+<template name='nuevaLiquidacion'>
+
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1> <i class="fas fa-plus"></i>  <b>AGREGAR</b> Liquidacion</h1>
+                 
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm collection="Liquidaciones" id="nuevaLiquidacion_" type="insert"}}
+{{> afQuickField  name='fecha'}}
+{{> afQuickField name='detalle'}}
+{{> afQuickField name='idUsuario' value=idUsuario type="hidden" }}
+{{> afQuickField name='nroLiquidacion' value=nroLiquidacion type="hidden" }}
+{{> afQuickField name='estado' value="PENDIENTE" type="hidden"}}
+ <button type="submit" disabled="{{disableButtons}}" id="btnAceptar" style="width:100%" class="btn btn-primary"><i class="fas fa-check-circle"></i>  ACEPTAR</button>
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+
+<template name='modificarLiquidaciones'>
+
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1> <i class="fas fa-pencil"></i> <i class="fas fa-box"></i> <b>MODIFICAR</b> Liquidacion</h1>
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm  collection="Liquidaciones" id="modificarLiquidacion_" doc=this type="update" }}
+{{> afQuickField name='fecha'}}
+{{> afQuickField name='detalle'}}
+{{#if esAdmin}}
+{{> afQuickField name='nroLiquidacion' }}
+{{> afQuickField name='idUsuario' }}
+{{> afQuickField name='estado'}}
+{{/if}}
+
+<button type="submit" disabled="{{disableButtons}}" id="btnAceptar" style="width:100%" class="btn btn-primary"><i class="fas fa-check-circle"></i> ACEPTAR</button>
+
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+<template name="muestraPaciente">
+{{nombrePaciente}}
+</template>
+<template name='nuevaLiquidacion_factura'>
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1> <i class="fas fa-plus"></i> <i class="fas fa-invoice-dollar"></i><b>NUEVA</b> Factura</h1>
+                   
+                </div>
+              <div class="modal-body">
+                
+            {{#autoForm  collection="Liquidaciones" id="nuevaLiquidacionFactura_" doc=doc scope="facturas" type="update-pushArray"}}
+              
+              <div class="row">
+                 <div class="col-md-4"> {{> afQuickField   id="fechaConsulta" name='fechaConsulta'}} </div>
+                 <div class="col-md-3">{{> afQuickField id="nroOrden"  name='nroOrden'}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-8"> {{> afQuickField name='idObraSocial'  id='idObraSocial' options=obrasSociales}} </div>
+         
+          </div>
+          <div class="row">
+              <div class="col-md-9"> {{> afQuickField name='idNomenclador' id='idNomenclador' options=nomencladores}} </div>
+              <div class="col-md-1"> <span id="rangoNomenclador" style="cursor:pointer;" class="label label-primary"></span></div>
+            </div>
+           
+           
+              <div class="row">
+              <div class="col-md-2"> {{> afQuickField  id="nroAfiliado" name='nroAfiliado'  }}</div>
+              <div class="col-md-8">{{> afQuickField  id="paciente" name='paciente'}}</div>
+             
+              </div>
+              
+              
+              
+               <div class="row">
+               <div class="col-md-2"> {{> afQuickField  id="coeficiente" name='coeficiente'}}</div>
+              <div class="col-md-2">{{> afQuickField  id="cantidad" name='cantidad'}}</div>
+              <div class="col-md-4">{{> afQuickField  id="importe" name='importe'}}   </div>
+                <div class="col-md-2">{{> afQuickField id="importe" name='esImporteFijo'}}</div>
+              </div>
+              {{> afQuickField name='nombreOs' type="hidden" id='nombreOs'}}
+              {{> afQuickField name='idRangoNomenclador' type="hidden"  id='idRangoNomenclador'}}
+              {{> afQuickField name='nombreNomenclador' type="hidden" id='nombreNomenclador'}}
+              <div class="row">
+                
+              </div>
+              <div class="row">
+                   <div class="col-md-6"><button type="submit" disabled="{{disableButtons}}" id="btnAceptar" style="width:100%" class="btn btn-primary"><i class="fas fa-check-circle"></i> <b>ACEPTAR</b> <small>(y cargar nueva en blanco)</small></button></div>
+                   <div class="col-md-6"><button type="submit" disabled="{{disableButtons}}" id="btnAceptarSetear" style="width:100%" class="btn btn-warning"><i class="fas fa-check-circle"></i> <b>ACEPTAR</b> <small>(y cargar nueva con mismos valores)</small></button></div>
+              </div>
+             
+              
+            {{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+<template name='modificarLiquidacion_factura'>
+ <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                   <h1> <i class="fas fa-pencil"></i> <i class="fas fa-pencil-alt"></i> <b>EDITAR</b> Factura</h1>
+
+                </div>
+                <div class="modal-body">
+                
+             {{#autoForm  collection="Liquidaciones" id="modificarLiquidacionFactura_" setArrayItems=true filter=false doc=doc  type="update" }}
+              <div class="row">
+                 <div class="col-md-4"> {{> afQuickField   id="fechaConsulta" name=eti_fechaConsulta}} </div>
+              <div class="col-md-3">{{> afQuickField   name=eti_nroOrden}}</div>
+            </div>
+            {{> afQuickField name=eti_idObraSocial  id='idObraSocial' options=obrasSociales}}
+            <div class="row">
+              <div class="col-md-9">{{> afQuickField name=eti_idNomenclador  id='idNomenclador' options=nomencladores}} </div>
+              <div class="col-md-1"> <span id="rangoNomenclador" style="cursor:pointer;" class="label label-primary"></span></div>
+            </div>
+           
+              <div class="row">
+              <div class="col-md-2"> {{> afQuickField value=nroAfiliadoDefault id="nroAfiliado" name=eti_nroAfiliado  }}</div>
+              <div class="col-md-8">{{> afQuickField value=pacienteDefault name=eti_paciente}}</div>
+             
+              </div>
+              
+              
+              
+               <div class="row">
+               <div class="col-md-2"> {{> afQuickField  id="coeficiente" name=eti_coeficiente}}</div>
+              <div class="col-md-2">{{> afQuickField  id="cantidad" name=eti_cantidad}}</div>
+              <div class="col-md-4">{{> afQuickField  id="importe" name=eti_importe}}   </div>
+                <div class="col-md-2">{{> afQuickField name=eti_esImporteFijo}}</div>
+              </div>
+              {{> afQuickField name=eti_nombreOs type="hidden" id='nombreOs'}}
+              {{> afQuickField name=eti_idRangoNomenclador type="hidden"  id='idRangoNomenclador'}}
+              {{> afQuickField name=eti_nombreNomenclador type="hidden" id='nombreNomenclador'}}
+              <div class="row">
+                
+              </div>
+             
+                 <button type="submit" disabled="{{disableButtons}}" id="btnAceptar" style="width:100%" class="btn btn-primary"><i class="fas fa-check-circle"></i> <b>ACEPTAR</b></button>
+             
+             
+              
+            {{/autoForm}}
+      
+              </div>
+             
+
+          </div>
+      </div>
+  </div>
+</template>

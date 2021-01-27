@@ -1,0 +1,133 @@
+<template name="imagenesSistema">
+  <table class="table table-condensed">
+    <tr>
+      <th>LOGO EMPRESA (png)</th>
+        <th>TARJETA FRENTE (pdf)</th>
+        <th>TARJETA DORSO (png)</th>
+    
+    </tr>
+    <tr>
+      <td><img  id="logoEmpresa" src="/images/formatopng.png" style="width:120px" title="Nombre Empresa"></td>
+      <td><img  id="frenteTarjeta" src="/images/logopdf.jpg" style="width:60px" title="Frente Tarjeta"></td>
+      <td> <img id="dorsoTarjeta" src="/images/formatopng.png" style="width:120px" title="Dorso Tarjeta"></td>
+    </tr>
+  </table>  
+{{> subirImagenSistema}}
+</template>
+<template name="accionesArchivos">
+  
+   <button title="Restaurar" type="button" class="restaurar btn  btn-xs btn-danger" aria-label="Left Align">  <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> </button>
+
+
+</template>
+<template name="googleDrive">
+
+                    <h4><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> GOOGLE DRIVE <small> backup</small></h4>
+<i>Mediante este modulo ud. podra tener sus datos seguros en servidores de google diariamente.</i><br><br>
+<div style="float:right">
+   <button title="Conectar" type="button" id="autorizar" class="btn  btn-xs btn-success" aria-label="Left Align">  
+                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span> <b>1. </b> AUTORIZAR</button> 
+  <button title="List Archivos" type="button" id="solicitarToken" class="btn  btn-xs btn-success" aria-label="Left Align">  
+                   <span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <b>2. </b> SOLICITAR TOKEN </button>    {{getToken}} 
+
+  </div>
+ 
+  <br><br>
+<div style="float:left">
+    <button title="Back up" type="button" id="backupear" class="btn  btn-xs btn-primary" aria-label="Left Align">  
+                   <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> BACKUP AHORA!</button>
+  </div>
+  <br>
+  {{> reactiveTable showNavigation='auto' showNavigationRowsPerPage="false" id="tablaArchivos" settings=settings}}
+               
+    <button title="List Archivos" type="button" id="archivos" style="width:100%" class="btn  btn-xs btn-success" aria-label="Left Align">  
+                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span> BUSCAR <b>BACKUP</b></button>
+  <br><br><br>
+  <i><b>*</b> para generar el servicio y conectar ingresar <a href="https://console.developers.google.com/?pli=1" tarjet>aqui</a></i>
+</template>
+<template name="subirImagenSistema">
+
+<h3>Ingrese el archivo <small> debe ser formato comun de imagen</small></h3>
+<div class="fileupload fileupload-new" data-provides="fileupload">
+   <span class="btn btn-file">
+      <span class="fileupload-new"></span>
+      <span class="fileupload-exists">{{file.label.de}}</span>
+      <input name="{{file.name}}" class="file-upload-input" method="{{file.method}}" type="file">
+   
+   </span>
+   <span class="fileupload-preview">
+   </span>
+   <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+</div>
+  <input type="radio" name="nombreImagen" value="logoEmpresa"> Logo de Empresa (formato .png)<br>
+  <input type="radio" name="nombreImagen" value="frenteTarjeta"> Frente Tarjetas (formato .pdf)<br>
+  <input type="radio" name="nombreImagen" value="dorsoTarjeta"> Dorso Tarjetas (formato .png)
+</template>
+<template name="tablaSistema">
+<div style="float:right">
+          <button title="Generar Variables" type="button" id="generarVariables" class="btn  btn-xs btn-success" aria-label="Left Align">  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> GENERAR VARIABLES </button>
+          <button title="PASAR CUENTAS DEBITO" type="button" id="pasarCuentasDebito" class="btn  btn-xs btn-success" aria-label="Left Align">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> PASAR CUENTAS DEBITO </button>
+ </div>
+  {{> reactiveTable id="tablaDatosSistema" settings=settings}}
+</template>
+
+<template name="datosSistema">
+<h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> DATOS SISTEMA<small>config</small> </h1>
+
+  <div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">DATOS DE SISTEMA</a></li>
+    <li role="presentation"><a href="#imagenes" aria-controls="profile" role="tab" data-toggle="tab">IMAGENES</a></li>
+    <li role="presentation"><a href="#googleDrive" aria-controls="profile" role="tab" data-toggle="tab">BACK GOOGLE DRIVE</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">{{>tablaSistema}}</div>
+    <div role="tabpanel" class="tab-pane" id="imagenes">{{> imagenesSistema}}</div>
+     <div role="tabpanel" class="tab-pane" id="googleDrive">{{> googleDrive}}</div>
+  </div>
+
+</div>
+
+
+</template>
+<template name="accionesDatosSistema">
+  <div class="acciones" style="display:none">
+   <button title="Modificar" type="button" class="update btn  btn-xs btn-primary" aria-label="Left Align">  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </button>
+   <button title="Quitar" type="button" class="delete btn  btn-xs btn-danger" aria-label="Left Align">  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>
+      
+  </div>
+</template>
+<template name='modificarDatosSistema'>
+<h1><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> EDITAR <small> configuracion</small></h1>
+  {{#autoForm collection="Settings" id="modificarDatosSistema_" doc=this type="update"}}
+
+  <div class='col-md-6'>
+     <fieldset>
+       {{> afQuickField name="clave" }}
+       {{> afQuickField name="valor" }}
+    </fieldset>
+
+  </div>
+<button type="submit" id="btnAceptar" style="width:100%" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> MODIFICAR</button>
+      {{/autoForm}}
+
+</template>
+<template name='nuevoDatosSistema'>
+<h1><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> NUEVA <small> configuracion</small></h1>
+{{#autoForm collection="Settings" id="nuevaConfiguracionSistema_" type="insert"}}
+
+  <div class='col-md-6'>
+     <fieldset>
+       {{> afQuickField name="clave" }}
+       {{> afQuickField name="valor" }}
+    </fieldset>
+    
+  </div>
+<button type="submit" id="btnAceptar" style="width:100%" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ACEPTAR</button>
+      {{/autoForm}}
+
+</template>

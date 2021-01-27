@@ -1,0 +1,32 @@
+<template name="nomencladores">
+
+   <h1><i class="fas fa-store"></i> NOMENCLADORES</h1>
+<br><br> 
+<div class="form-inline">
+{{>buscadorNomencladores}}
+{{>buscadorNombre}}
+</div>
+{{> reactiveTable id="tabla" settings=settings}}
+
+</template>
+<template name="buscadorNomencladores">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">COD.</div>
+      <input type="text" class="form-control" id="codigoNomenclador" placeholder="Codigo del nomenclador">
+    </div>
+  </div>
+
+</template>
+
+<template name="buscadorNombre">
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">NOMBRE</div>
+       <input style="width: 200px" type="text" class="form-control" id="nombreNomenclador" placeholder="Nombre del nomenclador">
+  
+    </div>
+  </div>
+
+</template>

@@ -1,0 +1,75 @@
+<template name="impresionCarnets">
+<h1><span class="glyphicon glyphicon-print" aria-hidden="true"></span> CARNETS <small>PLANTILLA DE CARNETS</small>  </h1>
+  Desde esta interfaz vas a poder imprimir los moldes para las tarjetas de SOCIOS<br><br><br>
+    <div class="col-md-4">
+       <button style="width:400px" title="Imprimir FRENTE" id="printFrente" type="button" class="btn  btn-xs btn-success" aria-label="Left Align"> 
+    <span class="glyphicon glyphicon-print" aria-hidden="true"></span> <b>FRENTE</b> Carnet </button>
+  </div>
+  
+ 
+ 
+
+</template>
+<template name="imprimirCarnetDorso">
+   <div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+                    <h4 class="modal-title">
+            
+         </h4>
+                </div>
+                <div class="modal-body">
+                 
+                  
+                </div>
+
+    </div>
+  </div>
+</div>
+    
+   
+</template>
+<template name="imprimirCarnetFrente">
+   <div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+                    <h4 class="modal-title">
+                      
+         </h4>
+                </div>
+                <div class="modal-body">
+                   <object width="100%" height="700px" type="application/pdf" data="/images/frenteTarjeta.pdf" id="pdf_content">
+                    <p>si no carga el pdf pr favor descargar ADOBE READER</p>
+                  </object>
+                  
+                </div>
+
+    </div>
+  </div>
+</div>
+    
+   
+</template>
+<template name="imprimirCarnetFrenteSimple">
+   <div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+                    <h4 class="modal-title">
+                      
+         </h4>
+                </div>
+                <div class="modal-body">
+                 <object width="100%" height="700px" type="application/pdf" data="/images/cards_dorso.pdf" id="pdf_content">
+                    <p>si no carga el pdf pr favor descargar ADOBE READER</p>
+                  </object>
+                </div>
+
+    </div>
+  </div>
+</div>
+    
+   
+</template>

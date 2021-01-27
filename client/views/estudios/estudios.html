@@ -1,0 +1,205 @@
+<template name='facturarEstudio'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+                    <h2 class="modal-title">
+                        APLICAR PRÁCTICAS A <b>LIQUIDACIÓN</b>
+                    </h2>
+                </div>
+                <div class="modal-body">
+                  <i>Se enviaran las prácticas a la liquidación seleccionada</i><br>
+                  
+                    <b>Liquidación</b> <select style="width: 400px" placeholder="Liquidación" id="idLiquidacion"></select>
+                  <br> <br>
+                <!--  <b>Nomenclador</b>
+                  <select style="width: 300px" placeholder="Nomenclador Asociado" id="idNomenclador"></select><br><br> -->
+                  <button style="width: 100%" id="btnAceptar" class="btn btn-success"> <b>ACEPTAR</b> </button>
+    
+  </div>
+
+</div>
+</div>
+  </div>
+</template>
+<template name='imprimirEstudio'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+                    <h4 class="modal-title"><button id="btnPrint" style="float:right" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button> </h4>
+                </div>
+                <div class="modal-body">
+                  <div  id='printable' class='printable'>
+
+                  <div style="padding-top: 40px;padding-bottom: 40px; padding-left: 60px;padding-right: 60px">
+                   <div style="float:right;" ><img src="/images/logo2.bmp"/></div>
+                   <i><b>FECHA: </b>{{fechaGral}}</i>
+                    <h1><B>SOLICITUD DE </B> ESTUDIO</h1>
+                     <div class="col-md-13">
+                     <div class="col-md-5">
+                      <h3>DATOS DEL <b>ESTUDIO</b></h3>
+                        <span><b>FECHA: </b>{{fecha}}</span> <br>
+                         <span><b>DIAGNOSTICO:</b>{{diagnostico}}</span><br>
+                         <span><b>ESTADO:</b>{{estado}}</span><br><br>
+
+
+                     </div>
+                      <div class="col-md-5">
+                        <h3>DATOS <b>PACIENTE</b></h3>
+                         <span><b>NOMBRE PACIENTE:</b>{{paciente_nombres}}</span><br>
+                         <span><b>DNI:</b>{{paciente_dni}}</span><br>
+                         <span><b>NRO AFILIADO:</b>{{paciente_nroAfiliado}}</span><br>
+                         <span><b>OBRA SOCIAL:</b>{{paciente_obraSocial}}</span><br>
+
+                     </div>
+                   </div>
+                  <br><br><br><br><br><br>
+      <table style="width: 100%" class="table table-condensed">
+        <thead> <tr><th width="80px">NRO</th><th  width="80px">CANTIDAD</th><th>PRACTICA</th></tr> </thead>
+        <tbody>
+        {{#each practicas}}
+              <tr><td>{{nro}}</td><td>{{cantidad}}</td><td>{{practica}}</td></tr>
+              {{/each}}
+            </tbody>
+      </table>
+              
+              <br>
+            
+              <small><i>Condiciones de la solicitud</i></small>
+              </div>
+            </div>
+    
+  </div>
+
+</div>
+</div>
+  </div>
+</template>
+<template name="estudios">
+
+   <h1><i style="color:#bb359e" class="fas fa-file-alt"></i> <b>ESTUDIOS</b></h1>
+
+{{> reactiveTable id="tabla" class="table-sm table" settings=settings}}
+ 
+</template>
+<template name="estudios_practicas">
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                      <h1><i class="fas fa-diagnoses"></i> <b>PRACTICAS DEL ESTUDIO</b></h1>
+{{#autoForm  collection="Estudios"  id="agregarPracticaEstudio_" doc=docu scope="practicas" type="update-pushArray"}}
+ {{> afQuickField  type="hidden" name='estado' value="PENDIENTE"}}
+  <fieldset>
+  <div class="form-inline">
+    {{> afQuickField  label=false  name='nro'}}
+    {{> afQuickField  label=false name='cantidad'}}
+ 
+    {{> afQuickField  label=false name='practica' id='practica'}}
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> AGREGAR</button>
+    </div>
+
+  
+
+  </fieldset>
+  
+{{/autoForm}}
+                </div>
+              <div class="modal-body">
+
+{{> reactiveTable id="tablaPracticas" class="table-sm table" settings=settings}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+ 
+</template>
+<template name="accionesEstudios">
+  <div class="acciones" style="display:none">
+     {{#if puedeFacturar}}
+      <button title="Facturar" type="button" id="facturar" class="btn  btn-xs btn-primary" aria-label="Left Align"> <i class="fas fa-file-invoice-dollar"></i> <span class="label label-danger">{{cantidadFacturar}}</span> </button>
+      {{/if}}
+       <button title="Imprimir" type="button" id="imprimir" class="btn  btn-xs btn-success" aria-label="Left Align">  <i class="fas fa-print"></i></button>
+     
+      <button title="Practicas" type="button" id="practicas" class="btn  btn-xs btn-success" aria-label="Left Align"> <i class="fas fa-diagnoses"></i> </button>
+      <button title="Modificar" type="button" id="update" class="activar btn  btn-xs btn-primary" aria-label="Left Align"> <i class="fas fa-pencil-alt"></i></button>
+          <button title="Quitar" type="button" id="delete" class="delete btn  btn-xs btn-danger" aria-label="Left Align">  <i class="fas fa-trash-alt"></i> </button>
+ </div>
+</template> 
+ <template name="accionesEstudios_practicas">
+  <div class="acciones" style="display:none">
+      <button title="Aprobar" type="button" id="aprobar" class="btn  btn-xs btn-success" aria-label="Left Align">  <i class="fas fa-thumbs-up"></i> </button>
+      <button title="Rechazar" type="button" id="rechazar" class="btn  btn-xs btn-warning" aria-label="Left Align"> <i class="fas fa-thumbs-down"></i></button>
+     <!--  <button title="Modificar" type="button" id="update" class="activar btn  btn-xs btn-primary" aria-label="Left Align">  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> </button> -->
+          <button title="Quitar" type="button" id="delete" class="delete btn  btn-xs btn-danger" aria-label="Left Align">  <i class="fas fa-trash-alt"></i></button>
+ </div>
+
+</template>
+<template name='nuevoEstudio'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1><span class="glyphicon glyphicon-add" aria-hidden="true"></span> NUEVO <small> ESTUDIO</small></h1>
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm  collection="Estudios" id="nuevoEstudio_" type="insert"}}
+  <fieldset>
+  <div class="row">
+      <div class="col-md-4"> {{> afQuickField name='fecha'}}</div>
+      <div class="col-md-4"> {{> afQuickField name='estado'}}</div>
+  </div>
+  {{> afQuickField name='diagnostico'}}
+  {{> afQuickField id="idPaciente" name='idPaciente'}}
+  {{> afQuickField id="idNomenclador" name='idNomenclador'}}
+
+  {{> afQuickField value=idUsuario name='idUsuario'}}
+  </fieldset>
+  <button style="width: 100%" type="submit" class="btn btn-primary">ACEPTAR</button>
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+<template name='modificarEstudio'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> MODIFICAR <small> ESTUDIO</small></h1>
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm  collection="Estudios" id="modificarEstudio_" doc=this type="update"}}
+  <fieldset>
+  <div class="row">
+      <div class="col-md-4"> {{> afQuickField name='fecha'}}</div>
+      <div class="col-md-4"> {{> afQuickField name='estado'}}</div>
+  </div>
+  {{> afQuickField name='diagnostico'}}
+  {{> afQuickField id="idPaciente" name='idPaciente'}}
+  {{> afQuickField id="idNomenclador" name='idNomenclador'}}
+  {{> afQuickField value=idUsuario name='idUsuario'}}
+  </fieldset>
+  <button style="width: 100%" type="submit" class="btn btn-primary">ACEPTAR</button>
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>

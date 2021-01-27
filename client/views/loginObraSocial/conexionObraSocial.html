@@ -1,0 +1,84 @@
+<template name="ConexionObraSocial">
+
+   <h1><i style="color:#bb359e" class="fas fa-plug"></i> <b>CONEXION OS</b></h1>
+<button class="btn btn-success" id="btnAgregar" style="float:right;"><b><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  NUEVO</b></button>
+{{> reactiveTable id="tabla" class="table-sm table" settings=settings}}
+ 
+</template>
+<template name="accionesConexionObraSocial">
+  
+<button title="Modificar" type="button" id="update" class="activar btn  btn-xs btn-primary" aria-label="Left Align">   <i class="fas fa-pencil-alt"></i> </button>
+
+    <button title="Quitar" type="button" id="delete" class="delete btn  btn-xs btn-danger" aria-label="Left Align">   <i class="fas fa-trash-alt"></i> </button>
+ 
+
+</template>
+<template name='nuevoConexionObraSocial'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> CONEXION <small> OS</small></h1>
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm  collection="ConexionObraSocial" id="nuevoConexionObraSocial_" type="insert"}}
+  <fieldset>
+
+  <div class="row">
+      <div class="col-md-6">{{> afQuickField name='urlLogin'}} </div>
+      <div class="col-md-3">{{> afQuickField name='idObraSocial'}} </div>
+  </div>
+
+   <div class="row">
+      <div class="col-md-4">{{> afQuickField name='selectorResultado'}} </div>
+      <div class="col-md-3">{{> afQuickField name='resultadoPositivo'}} </div>
+  </div>
+  
+  </fieldset>
+  <button style="width: 100%" type="submit" class="btn btn-primary">ACEPTAR</button>
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>
+
+<template name='modificarConexionObraSocial'>
+
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                   <h1><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> LOGIN OS <small> </small></h1>
+                </div>
+              <div class="modal-body">
+                
+{{#autoForm  collection="ConexionObraSocial" id="modificarConexionObraSocial_" doc=this type="update"}}
+  <fieldset>
+
+  <div class="row">
+      <div class="col-md-6">{{> afQuickField name='urlLogin'}} </div>
+      <div class="col-md-3">{{> afQuickField name='idObraSocial'}} </div>
+  </div>
+
+   <div class="row">
+      <div class="col-md-4">{{> afQuickField name='selectorResultado'}} </div>
+      <div class="col-md-3">{{> afQuickField name='resultadoPositivo'}} </div>
+  </div>
+  
+  </fieldset>
+  <button style="width: 100%" type="submit" class="btn btn-primary">ACEPTAR</button>
+{{/autoForm}}
+      
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>

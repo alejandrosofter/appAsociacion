@@ -1,0 +1,31 @@
+<template name="mensajesInternos">
+<div id="chatModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+                <div class="modal-header">
+                 <h4><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 
+                 MENSAJE <input placeholder="" id="cuerpoMensaje" type="text" style="width:450px">
+                <button title="Enviar" type="button" class="agregarMensaje btn  btn-xs btn-success" aria-label="Left Align">  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ENVIAR</button>
+       </h4>
+                </div>
+              <div class="modal-body">
+              
+                    <div id='printable'>
+                        <table class="table table-condensed">
+                         <thead><tr><th>Mensaje</th></tr></thead>
+                         <tbody>
+                         {{#each items}}
+                          <tr><td>{{mensajeChat}}</td></tr>
+                          
+                          {{/each}}
+                         </tbody>
+                        </table>
+                    </div>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+</template>

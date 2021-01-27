@@ -1,0 +1,19 @@
+<template name='ventana'>
+<div id="nuevo{{nombreVentana}}" class="modal fade"> 
+        <div class="modal-dialog {{sizeVentana}}">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                	
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-{{icono}}" aria-hidden="true"></span><b> {{tituloVentana}} </b> <span style="text-transform: capitalize">{{subTituloVentana}}</span></h4>
+                </div>
+                <div class="modal-body">
+                      {{> Template.dynamic template=tmplVentana data=this}}
+                  
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</template>
